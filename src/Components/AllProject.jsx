@@ -15,7 +15,7 @@ export default function AllProject() {
   const navigate = useNavigate(); 
 
   // משיכת רשימת הפרויקטים מה-Store
- // const projects = useSelector((state) => state.project.projectsList || state.project);
+
 const projects = useSelector((state) => state.project.projectsList);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);

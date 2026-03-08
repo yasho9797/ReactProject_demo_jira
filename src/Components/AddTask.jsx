@@ -210,8 +210,9 @@ import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { AddTaskToProject } from './store/projectSlice'; // תוודאי שהנתיב נכון
+import { AddTaskToProject, updateTask } from './store/projectSlice'; // תוודאי שהנתיב נכון
 import { useParams } from 'react-router-dom';
+
 
 const AddTask = ({ visible: externalVisible, onHide, taskData, isEditMode }) => {
     const [internalVisible, setInternalVisible] = useState(false);
@@ -257,8 +258,18 @@ const AddTask = ({ visible: externalVisible, onHide, taskData, isEditMode }) => 
 
     const onSubmit = (data) => {
         if (isEditMode) {
-            console.log("מעדכן משימה קיימת:", data);
-            // כאן תכניסי את ה-dispatch של העריכה (UpdateTask)
+            dispatch(updateTask({
+                projectId : projectId,
+                column : data.status,
+                taskId: taskData.id,
+                updateTask:{
+                    name : data.taskName,
+                    description : data.description,
+                    priority: data.priority,
+                    deadline: data.deadline ? data.deadline.toLocaleDateString() : ''
+                }
+            }));
+            
         } else {
             dispatch(AddTaskToProject({
                 projectId: parseInt(projectId),
