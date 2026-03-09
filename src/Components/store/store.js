@@ -4,7 +4,7 @@ import userReducer from "./userSlice";
 import projectReducer from "./projectSlice";
 import { persistReducer, persistStore } from "redux-persist";
 
-// --- הפתרון היצירתי: הגדרת Storage ידני ---
+
 const manualStorage = {
   getItem: (key) => {
     return Promise.resolve(localStorage.getItem(key));
@@ -20,8 +20,10 @@ const manualStorage = {
 };
 
 const rootReducer = combineReducers({
+
     user: userReducer,
     project: projectReducer,
+
 });
 
 const persistConfig = {
